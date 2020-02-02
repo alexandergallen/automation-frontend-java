@@ -1,0 +1,12 @@
+{
+  "description": "API automation test file",
+  "public": true,
+  "files": {
+    "test.txt": {
+      "content": "Testing testing 123 123"
+    },
+    "test.feature": {
+      "content": "//Empty feature file"
+    }
+  }
+}
