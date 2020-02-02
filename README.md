@@ -8,7 +8,7 @@
 ## Frontend testing
 
 ### Pre-requisites
-- Download chromedriver (https://chromedriver.chromium.org/downloads)
+- Download chromedriver: https://chromedriver.chromium.org/downloads (tested working with ChromeDriver 79.0.3945.36)
   - Take note of location of chromedriver.exe and pass it as command line argument (see below)
 ### Execution
 - (From project root) execute using default Chromedriver path (C:\ChromeDriver\chromedriver.exe):
