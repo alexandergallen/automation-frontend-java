@@ -7,10 +7,17 @@
 
 ## Frontend testing
 
+### Pre-requisites
+- Download chromedriver (https://chromedriver.chromium.org/downloads)
+  - Take note of location of chromedriver.exe and pass it as command line argument (see below)
 ### Execution
-- (From project root) execute:
+- (From project root) execute using default Chromedriver path (C:\ChromeDriver\chromedriver.exe):
 ```
 ./gradlew cucumber
+```
+- Using custom Chromedriver path (**Windows users note:** *backslash has to be escaped*):
+```
+./gradlew cucumber -PchromeDriverPath=C:\\ChromeDriver\\chromedriver.exe
 ```
 ### Important files
 - Cucumber feature file "etsy.feature" in "src/test/resources/cucumber/"
