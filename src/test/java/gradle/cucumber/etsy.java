@@ -4,7 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.*;
+import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.function.Function;
 
 import io.cucumber.java.en.And;
 import org.openqa.selenium.By;
@@ -18,12 +22,14 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class etsy {
     WebDriver driver = null;
     WebDriverWait wait;
+    String chromeDriverPath;
     List<String> itemInfo = new ArrayList<>();
     List<String> itemPrice = new ArrayList<>();
 
@@ -33,10 +39,30 @@ public class etsy {
         driver.quit();
     }
 
+    // Method to check if sortingMenu has correct value
+    // Added a wait to the check due to it otherwise resulting in very rare flakiness of the test due to the ajax
+    // on the webpage and it loading slower than expected.
+    // Added more verbose error message for easier debugging.
+    private boolean doesSortingLabelContainText(String sortingLabelValue){
+        try{
+            new WebDriverWait(driver, 10).until(ExpectedConditions.textToBe(By.xpath("//span[@class='wt-menu__trigger__label']"), sortingLabelValue));
+            return true;
+        } catch(Exception e){
+            System.out.println("FAILED:\n"+
+                    "Expected: "+sortingLabelValue+
+                    "\nGot: "+driver.findElement(By.xpath("//span[@class='wt-menu__trigger__label']")).getText());
+            return false;
+        }
+    }
     // Method to open a webpage
     private void openWebpage(String url) {
         // Path to local chromedriver should be modified accoridngly. Please refer to README.
-        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
+        if(!System.getProperty("chromeDriverPath").isEmpty()){
+            chromeDriverPath=System.getProperty("chromeDriverPath");
+        }else{
+            chromeDriverPath="C:\\ChromeDriver\\chromedriver.exe";
+        }
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
         driver.navigate().to(url);
         // Disables popup if it exists (relevant for Etsy.com)
@@ -52,9 +78,10 @@ public class etsy {
         // Open dropdown to choose sorting method
         driver.findElement(By.xpath("//button[@data-wt-menu-trigger]")).click();
 
-        // Let the test wait for the element to be loaded until it attempts to click it.
-        // Omitting these lines causes the test to click wrong item in dropdown since it attempts to click while it is still moving
+        // Let the test wait for the dropdown to be expanded and element to be visible until it attempts to click it.
+        // Omitting these lines causes the test to sometimes click wrong item in dropdown since it attempts to click while it is still moving
         wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.attributeToBe(By.xpath("//button[@data-wt-menu-trigger]"),"aria-expanded","true"));
         WebElement menuItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@"+menuItemAttribute+"]")));
         // Click on correct sorting method
         menuItem.click();
@@ -128,9 +155,8 @@ public class etsy {
     public void the_items_should_be_sorted_accordingly() {
         double previousPrice = 0;
         // Checks that correct sorting was achieved and is displayed
-        assertEquals("Wrong sorting option was set",
-                "Sort by: Lowest Price",
-                driver.findElement(By.xpath("//span[@class='wt-menu__trigger__label']")).getText());
+        assertTrue("Wrong sorting option was set",
+                doesSortingLabelContainText("Sort by: Lowest Price"));
         // Checks that the items shown are actually sorted correctly
         // Gets all listed items
         // For this only the first page is checked, it is assumed that the rest are correct if the first page is.
@@ -148,9 +174,8 @@ public class etsy {
         // Since the search returned more than 250 pages worth of items the price has to be sorted by price desc to get
         // most expensive item
         sortItems("data-sort-by-price_desc");
-        assertEquals("Wrong sorting option was set",
-                "Sort by: Highest Price",
-                driver.findElement(By.xpath("//span[@class='wt-menu__trigger__label']")).getText());
+        assertTrue("Wrong sorting option was set",
+                doesSortingLabelContainText("Sort by: Highest Price"));
         // Get list of items and filter out adds using class: organic impression
         List<WebElement> items = driver.findElements(By.xpath("//ul[contains(@class,'responsive-listing-grid')]/li/div/a[contains(@class, 'organic-impression')]"));
         // Add most expensive item to cart
