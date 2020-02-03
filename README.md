@@ -3,7 +3,7 @@
 ## General
 
 ### Pre-requisites
-- JDK installed (tested working with 1.8.0_241)
+- JDK installed (tested working with 1.8.0_241 on Windows and Java 11 on MacOS)
 
 ### Common errors
 - On ./gradlew cucumber or ./gradlew api_cucumber
@@ -48,6 +48,7 @@ ___
 ### Important files
 - Cucumber feature file "etsy.feature" in "src/test/resources/cucumber/"
 - Step definition file "etsy.java" in "src/test/java/gradle/cucumber/"
+- Page objects in "src/test/java/pageObjects/"
 - build.gradle contains all the required dependencies and the task "cucumber" which executes the frontend tests
 
 ### Tools
