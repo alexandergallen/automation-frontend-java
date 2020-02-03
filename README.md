@@ -7,20 +7,25 @@
 
 ### Common errors
 - On ./gradlew cucumber or ./gradlew api_cucumber
-```
-What went wrong:
-Execution failed for task ':compileTestJava'.
-> Could not find tools.jar. Please check that C:\Program Files\Java\jre1.8.0_231 contains a valid JDK installation.
-```
-Cause: Gradle is unable to find your JDK installation
+  ```
+  What went wrong:
+  Execution failed for task ':compileTestJava'.
+  > Could not find tools.jar. Please check that C:\Program Files\Java\jre1.8.0_231 contains a valid JDK installation.
+  ```
+  Cause: Gradle is unable to find your JDK installation
 
-**Fix: add a gradle.properties file to project root with path to your jdk**
-```shell
-Alex@Alex MINGW64 ~/automation-frontend-java (master)
-$ cat gradle.properties
-org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_162
-```
-
+  **Fix: add a gradle.properties file to project root with path to your jdk**
+  ```shell
+  Alex@Alex MINGW64 ~/automation-frontend-java (master)
+  $ cat gradle.properties
+  org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_162
+  ```
+___
+- On max/linux ./gradlew build/cucumber/api_cucumber
+  ```
+  ./gradlew: Permission denied
+  ```
+  **Fix: chmod +x gradlew**
 
 ## Frontend testing
 
