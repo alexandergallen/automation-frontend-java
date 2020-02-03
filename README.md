@@ -15,7 +15,8 @@ Execution failed for task ':compileTestJava'.
 Cause: Gradle is unable to find your JDK installation
 
 **Fix: add a gradle.properties file to project root with path to your jdk**
-**- Example: org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_162**
+
+*Example: org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_162*
 
 
 ## Frontend testing
