@@ -28,6 +28,10 @@ org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_162
 - Download chromedriver: https://chromedriver.chromium.org/downloads (tested working with ChromeDriver 79.0.3945.36)
   - Take note of location of chromedriver.exe and pass it as command line argument (see below)
 ### Execution
+- After cloning repository, run:
+```
+./gradlew build 
+```
 - (From project root) execute using default Chromedriver path (C:\ChromeDriver\chromedriver.exe):
 ```
 ./gradlew cucumber
@@ -49,6 +53,10 @@ org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_162
 ## API testing
 
 ### Execution
+- After cloning repository, run:
+```
+./gradlew build 
+```
 - (From project root) execute:
 ```
 ./gradlew api_cucumber -Pusername=exampleuser -Ppassword=examplepassword
