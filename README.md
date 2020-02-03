@@ -6,7 +6,7 @@
 - JDK installed (tested working with 1.8.0_241)
 
 ### Common errors
-- On ./gradlew task
+- On ./gradlew cucumber or ./gradlew api_cucumber
 ```
 What went wrong:
 Execution failed for task ':compileTestJava'.
