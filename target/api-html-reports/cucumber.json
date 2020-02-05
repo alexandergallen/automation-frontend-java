@@ -1,0 +1,215 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 2,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 234000000,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "I access github api",
+            "match": {
+              "location": "api.cucumber.gitApi.i_access_github_api()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-05T16:10:55.480Z",
+        "line": 5,
+        "name": "Create a gist",
+        "description": "",
+        "id": "git-api-testing;create-a-gist",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3419000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I create a gist",
+            "match": {
+              "location": "api.cucumber.gitApi.i_create_a_gist()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 493000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "The gist was created",
+            "match": {
+              "location": "api.cucumber.gitApi.the_gist_was_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 45000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "It contains correct information",
+            "match": {
+              "location": "api.cucumber.gitApi.it_contains_correct_information()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "I access github api",
+            "match": {
+              "location": "api.cucumber.gitApi.i_access_github_api()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-05T16:10:59.707Z",
+        "line": 10,
+        "name": "Retrieve a gist",
+        "description": "",
+        "id": "git-api-testing;retrieve-a-gist",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 423000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I retrieve a gist",
+            "match": {
+              "location": "api.cucumber.gitApi.i_retrieve_a_gist()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 23000000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "The correct gist is retrieved",
+            "match": {
+              "location": "api.cucumber.gitApi.the_correct_gist_is_retrieved()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 359000000,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "It contains all fields specified in the documentation",
+            "match": {
+              "location": "api.cucumber.gitApi.it_contains_all_fields_specified_in_the_documentation()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "I access github api",
+            "match": {
+              "location": "api.cucumber.gitApi.i_access_github_api()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-05T16:11:00.517Z",
+        "line": 15,
+        "name": "Delete a gist",
+        "description": "",
+        "id": "git-api-testing;delete-a-gist",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 675000000,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "I get gist to delete",
+            "match": {
+              "location": "api.cucumber.gitApi.i_get_gist_to_delete()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 681000000,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "I delete the gist",
+            "match": {
+              "location": "api.cucumber.gitApi.i_delete_the_gist()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 384000000,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "The gist doesn\u0027t exist anymore",
+            "match": {
+              "location": "api.cucumber.gitApi.the_gist_doesn_t_exist_anymore()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Git api testing",
+    "description": "",
+    "id": "git-api-testing",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/api/gitApi.feature",
+    "tags": []
+  }
+]
