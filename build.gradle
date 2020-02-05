@@ -35,7 +35,10 @@ task cucumber() {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources/cucumber']
+            args = ['--plugin', 'pretty',
+                    '--plugin', 'html:target/cucumber-html-reports',
+                    '--plugin', 'json:target/cucumber-html-reports/cucumber.json',
+                    '--glue', 'gradle.cucumber', 'src/test/resources/cucumber']
             systemProperty "chromeDriverPath", findProperty("chromeDriverPath")
         }
     }
@@ -46,7 +49,10 @@ task api_cucumber() {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'api.cucumber', 'src/test/resources/api']
+            args = ['--plugin', 'pretty',
+                    '--plugin', 'html:target/cucumber-html-reports',
+                    '--plugin', 'json:target/cucumber-html-reports/cucumber.json',
+                    '--glue', 'api.cucumber', 'src/test/resources/api']
             systemProperty "username", findProperty("username")
             systemProperty "password", findProperty("password")
         }

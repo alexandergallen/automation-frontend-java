@@ -5,7 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.*;
 
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,9 +33,14 @@ public class etsy {
     CartPage cartPage;
     ItemInfoPage itemInfoPage;
 
-    // Close chrome after each scenario
+    // Close web driver after each scenario.
+    // Take screenshot if scenario failed.
     @After
-    public void closeChrome(){
+    public void doSomethingAfter(Scenario scenario){
+        if (scenario.isFailed()) {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png");
+        }
         driver.quit();
     }
 
