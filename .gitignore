@@ -2,3 +2,5 @@
 /.gradle/
 /build/
 /build/classes/java/test/
+/target/api-html-reports/
+/target/cucumber-html-reports/
