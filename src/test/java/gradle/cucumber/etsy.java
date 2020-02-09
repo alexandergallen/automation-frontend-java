@@ -49,16 +49,14 @@ public class etsy {
     // Method to open a webpage
     private void openWebpage(String url) {
         // Path to local chromedriver should be modified accoridngly. Please refer to README.
-        System.out.println(System.getProperty("os.name"));
         if(!System.getProperty("chromeDriverPath").isEmpty()){
             chromeDriverPath=System.getProperty("chromeDriverPath");
         }else{
             chromeDriverPath="C:\\ChromeDriver\\chromedriver.exe";
         }
         if(System.getProperty("os.name").equals("Linux")){
-            System.out.println("Success");
             chromeDriverPath="/chromedriver";
-            options.addArguments("--headless", "--disable_gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent", "--no-sandbox");
+            options.addArguments("--headless", "--disable-dev-shm-usage", "start-maximized","--ignore-certificate-errors", "--silent", "--no-sandbox");
         }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
