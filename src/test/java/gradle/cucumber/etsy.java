@@ -60,13 +60,13 @@ public class etsy {
                     "start-maximized",
                     "--ignore-certificate-errors",
                     "--no-sandbox",
-                    "lang=en-us",
+                    "--lang=en-US",
                     "--disable-infobars",
                     "--disable-browser-side-navigation",
                     "--disable-gpu",
                     "enable-automation");
         } else{
-            options.addArguments("--headless", "lang=en-us", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
+            options.addArguments("--headless", "--lang=en-US", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
         }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver(options);
