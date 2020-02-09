@@ -53,6 +53,9 @@ public class etsy {
         }
         if(System.getProperty("os.name").equals("Linux")){
             chromeDriverPath="/chromedriver";
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("intl.accept_languages", "en-US");
+            options.setExperimentalOption("prefs", prefs);
             options.addArguments("--headless",
                     "--whitelisted-ips",
                     "--disable-dev-shm-usage",
