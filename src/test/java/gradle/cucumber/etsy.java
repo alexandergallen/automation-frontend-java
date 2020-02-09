@@ -65,8 +65,9 @@ public class etsy {
                     "--disable-gpu",
                     "enable-automation");
             //AGRESSIVE: options.setPageLoadStrategy(PageLoadStrategy.NONE); // https://www.skptricks.com/2018/08/timed-out-receiving-message-from-renderer-selenium.html
+        } else{
+            options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
         }
-        options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver(options);
         driver.navigate().to(url);
