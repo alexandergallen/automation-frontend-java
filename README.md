@@ -50,6 +50,7 @@ ___
 - Step definition file "etsy.java" in "src/test/java/gradle/cucumber/"
 - Page objects in "src/test/java/pageObjects/"
 - build.gradle contains all the required dependencies and the task "cucumber" which executes the frontend tests
+- Test results in "target/cucumber-html-reports/", run index.html in your browser
 
 ### Tools
 - Gradle
@@ -75,6 +76,7 @@ Please note that your github username and password should be passed as arguments
 - Json schema git_api_gist.json for validating GET /gists/{id} in "src/test/resources/"
 - Post body postBody.json for populating body of POST /gists in "src/test/resources/"
 - build.gradle contains all the required dependencies and the task "api_cucumber" which executes the API tests
+- Test results in "target/api-html-reports/", run index.html in your browser
 
 ### Tools
 - Gradle
