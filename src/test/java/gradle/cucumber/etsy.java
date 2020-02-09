@@ -56,7 +56,7 @@ public class etsy {
         }
         if(System.getProperty("os.name").equals("Linux")){
             chromeDriverPath="/chromedriver";
-            options.addArguments("--headless", "--disable-dev-shm-usage", "start-maximized","--ignore-certificate-errors", "--silent", "--no-sandbox");
+            options.addArguments("--headless", "--disable-dev-shm-usage", "--start-maximized","--ignore-certificate-errors", "--silent", "--no-sandbox");
         }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
