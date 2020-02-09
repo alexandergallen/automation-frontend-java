@@ -56,7 +56,7 @@ public class etsy {
         }
         if(System.getProperty("os.name").equals("Linux")){
             chromeDriverPath="/chromedriver";
-            options.addArguments("--headless", "--disable-dev-shm-usage", "--window-size=1920,1080", "--start-maximized", "--ignore-certificate-errors", "--no-sandbox");
+            options.addArguments("--headless", "--whitelisted-ips", "--disable-dev-shm-usage", "--window-size=1920,1080", "--start-maximized", "--ignore-certificate-errors", "--no-sandbox");
         }
         options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized");
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
