@@ -17,6 +17,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
 import pageObjects.HomePage;
@@ -26,6 +27,7 @@ public class etsy {
     WebDriver driver = null;
     WebDriverWait wait;
     String chromeDriverPath;
+    ChromeOptions options = new ChromeOptions();
     List<String> itemInfoList = new ArrayList<>();
     List<String> itemPriceList = new ArrayList<>();
 
@@ -51,6 +53,9 @@ public class etsy {
             chromeDriverPath=System.getProperty("chromeDriverPath");
         }else{
             chromeDriverPath="C:\\ChromeDriver\\chromedriver.exe";
+        }
+        if(System.getProperty("os.name").contains("Linux")){
+            options.addArguments("--headless", "--disable_gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent", "--no-sandbox");
         }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
