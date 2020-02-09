@@ -15,6 +15,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
 import pageObjects.HomePage;
@@ -63,7 +64,6 @@ public class etsy {
                     "start-maximized",
                     "--ignore-certificate-errors",
                     "--no-sandbox",
-                    "--lang=en-US",
                     "--disable-infobars",
                     "--disable-browser-side-navigation",
                     "--disable-gpu",

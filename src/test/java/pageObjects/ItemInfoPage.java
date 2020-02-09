@@ -40,6 +40,7 @@ public class ItemInfoPage {
         }
     }
     public String getItemDescription(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(itemDescription));
         return itemDescription.getText();
     }
 
