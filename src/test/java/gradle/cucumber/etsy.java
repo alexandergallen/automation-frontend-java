@@ -55,7 +55,8 @@ public class etsy {
         }else{
             chromeDriverPath="C:\\ChromeDriver\\chromedriver.exe";
         }
-        if(System.getProperty("os.name").contains("Linux")){
+        if(System.getProperty("os.name").equals("Linux")){
+            System.out.println("Success");
             chromeDriverPath="/chromedriver";
             options.addArguments("--headless", "--disable_gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent", "--no-sandbox");
         }
