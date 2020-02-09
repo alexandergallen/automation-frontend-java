@@ -59,7 +59,7 @@ public class etsy {
             options.addArguments("--headless", "--disable-dev-shm-usage", "--start-maximized","--ignore-certificate-errors", "--silent", "--no-sandbox");
         }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.navigate().to(url);
     }
 
