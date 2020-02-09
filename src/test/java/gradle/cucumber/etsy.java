@@ -7,10 +7,7 @@ import java.util.*;
 
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.After;
@@ -56,9 +53,20 @@ public class etsy {
         }
         if(System.getProperty("os.name").equals("Linux")){
             chromeDriverPath="/chromedriver";
-            options.addArguments("--headless", "--whitelisted-ips", "--disable-dev-shm-usage", "--window-size=1920,1080", "--start-maximized", "--ignore-certificate-errors", "--no-sandbox");
+            options.addArguments("--headless",
+                    "--whitelisted-ips",
+                    "--disable-dev-shm-usage",
+                    "--window-size=1920,1080",
+                    "start-maximized",
+                    "--ignore-certificate-errors",
+                    "--no-sandbox",
+                    "--disable-infobars",
+                    "--disable-browser-side-navigation",
+                    "--disable-gpu",
+                    "enable-automation");
+            //AGRESSIVE: options.setPageLoadStrategy(PageLoadStrategy.NONE); // https://www.skptricks.com/2018/08/timed-out-receiving-message-from-renderer-selenium.html
         }
-        options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized");
+        options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver(options);
         driver.navigate().to(url);
