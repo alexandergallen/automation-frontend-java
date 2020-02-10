@@ -25,7 +25,7 @@ public class ItemInfoPage {
     private WebElement itemDescription;
     @FindBy(xpath = "//div[@data-buy-box-region='price']/p/span")
     private WebElement itemPrice;
-    @FindBy(xpath = "//button/div[contains(text(), 'Add to cart')]")
+    @FindBy(xpath = "//button/div[contains(text(), 'Add to basket')]")
     private WebElement addToCartButton;
 
     public void populateAllSelections(){
