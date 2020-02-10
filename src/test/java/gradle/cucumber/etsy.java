@@ -7,16 +7,16 @@ import java.util.*;
 
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
 import pageObjects.HomePage;
@@ -25,6 +25,7 @@ import pageObjects.ItemInfoPage;
 public class etsy {
     WebDriver driver = null;
     WebDriverWait wait;
+    //ChromeOptions options = new ChromeOptions();
     String chromeDriverPath;
     List<String> itemInfoList = new ArrayList<>();
     List<String> itemPriceList = new ArrayList<>();
@@ -53,7 +54,9 @@ public class etsy {
             chromeDriverPath="C:\\ChromeDriver\\chromedriver.exe";
         }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Alexa\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe");
+        //driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.navigate().to(url);
     }
 
@@ -77,7 +80,7 @@ public class etsy {
 
     @When("I sort the results by price ascending")
     public void i_sort_the_results_by_price_ascending() {
-        homePage.sortItems(homePage.sortDropDownValuePriceAsc);
+        homePage.sortItems(homePage.getSortDropDownValuePriceAsc());
     }
 
     @Then("The items should be sorted accordingly")
@@ -94,18 +97,22 @@ public class etsy {
     public void theMostExpensiveItemIsAddedToTheCart() {
         // Since the search returned more than 250 pages worth of items the price has to be sorted by price desc to get
         // most expensive item
-        homePage.sortItems(homePage.sortDropDownValuePriceDesc);
+        wait = new WebDriverWait(driver, 10);
+        homePage.sortItems(homePage.getSortDropDownValuePriceDesc());
         assertTrue("Wrong sorting option was set",
                 homePage.doesSortingLabelContainText(homePage.sortLabelStringPriceDesc));
         // Create handle for multiple tabs
         String winHandleBefore = driver.getWindowHandle();
         homePage.clickItem(0);
-
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
         // Switch to the new tab since clicking on item automatically opens new tab
         for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
+            if(!winHandle.equals(winHandleBefore)){
+                driver.switchTo().window(winHandle);
+                break;
+            }
         }
-
+        wait.until(ExpectedConditions.urlContains("etsy.com/listing/"));
         itemInfoPage = new ItemInfoPage(driver);
         // Populate all selections on item info page
         itemInfoPage.populateAllSelections();
@@ -127,11 +134,15 @@ public class etsy {
         // Taking "random" item by using default sort (Relevancy) and taking the middle item from
         // the list of items that weren't ads.
         homePage.clickItem(homePage.getNumberOfSearchResultsWithoutAds()/2);
-
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
         // Switch to the new tab since clicking on item automatically opens new tab
         for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
+            if(!winHandle.equals(winHandleBefore)){
+                driver.switchTo().window(winHandle);
+                break;
+            }
         }
+        wait.until(ExpectedConditions.urlContains("etsy.com/listing/"));
         // Populate all selections on item info page
         itemInfoPage.populateAllSelections();
         // Get item info and price and store it into lists that are checked in cart validation.

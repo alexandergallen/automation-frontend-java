@@ -33,17 +33,21 @@ public class HomePage {
     private WebElement cart;
     @FindBy(xpath = "//button[contains(text(), 'Accept')]")
     private WebElement acceptCookiesButton;
-
-    // Sorting options need to be public since they can be passed as parameters to sortItems method
     @FindBy(xpath = "//a[@data-sort-by-price_asc]")
-    public WebElement sortDropDownValuePriceAsc;
+    private WebElement sortDropDownValuePriceAsc;
     @FindBy(xpath = "//a[@data-sort-by-price_desc]")
-    public WebElement sortDropDownValuePriceDesc;
+    private WebElement sortDropDownValuePriceDesc;
 
     // Search results excluding ads
     @FindBy(xpath = "//ul[contains(@class,'responsive-listing-grid')]/li/div/a[contains(@class, 'organic-impression')]")
     private List<WebElement> searchResultsNoAds;
 
+    public WebElement getSortDropDownValuePriceAsc(){
+        return sortDropDownValuePriceAsc;
+    }
+    public WebElement getSortDropDownValuePriceDesc(){
+        return sortDropDownValuePriceDesc;
+    }
     public void acceptCookies(){
         // Disables popup if it exists (relevant for Etsy.com)
         try{

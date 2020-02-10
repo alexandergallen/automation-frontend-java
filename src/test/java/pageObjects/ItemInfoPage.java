@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +24,9 @@ public class ItemInfoPage {
     private List<WebElement> selections;
     @FindBy(xpath = "//h1[@data-buy-box-listing-title]")
     private WebElement itemDescription;
-    @FindBy(xpath = "//div[@data-buy-box-region='price']/p/span")
+//    @FindBy(xpath = "//div[@data-buy-box-region='price']//h3")
+//    private WebElement itemPrice;
+    @FindBy(xpath = "//h3[contains(@class,'wt-text-title-03')]")
     private WebElement itemPrice;
     @FindBy(xpath = "//button/div[contains(text(), 'Add to cart')]")
     private WebElement addToCartButton;
@@ -40,12 +43,16 @@ public class ItemInfoPage {
         }
     }
     public String getItemDescription(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(itemDescription));
         return itemDescription.getText();
     }
 
     public String getItemPrice(){
         // Wait for browser to update price element. This is required since selecting some options might change price.
-        new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(itemPrice,"+")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(itemPrice));
+        if(itemPrice.getText().contains("+")){
+            new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(itemPrice,"+")));
+        }
         return itemPrice.getText();
     }
     public void addItemToCart(){
