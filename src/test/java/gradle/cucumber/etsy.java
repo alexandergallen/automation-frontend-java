@@ -2,6 +2,7 @@ package gradle.cucumber;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
 import java.util.*;
 
@@ -16,6 +17,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
 import pageObjects.HomePage;
@@ -119,12 +121,15 @@ public class etsy {
         // Create handle for multiple tabs
         String winHandleBefore = driver.getWindowHandle();
         homePage.clickItem(0);
-
+        new WebDriverWait(driver,10).until(numberOfWindowsToBe(2));
         // Switch to the new tab since clicking on item automatically opens new tab
         for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
+            if(!winHandleBefore.contentEquals(winHandle)) {
+                driver.switchTo().window(winHandle);
+                break;
+            }
         }
-
+        new WebDriverWait(driver,10).until(ExpectedConditions.urlContains("etsy.com/listing/"));
         itemInfoPage = new ItemInfoPage(driver);
         // Populate all selections on item info page
         itemInfoPage.populateAllSelections();
