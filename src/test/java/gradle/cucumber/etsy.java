@@ -129,7 +129,7 @@ public class etsy {
                 break;
             }
         }
-        new WebDriverWait(driver,10).until(ExpectedConditions.urlContains("etsy.com/listing/"));
+        new WebDriverWait(driver,10).until(ExpectedConditions.urlContains("etsy.com/uk/listing/"));
         itemInfoPage = new ItemInfoPage(driver);
         // Populate all selections on item info page
         itemInfoPage.populateAllSelections();
