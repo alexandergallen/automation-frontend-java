@@ -1,5 +1,8 @@
 # automation-frontend-java
 
+Example execution in Jenkins can be found in: https://jenkins.alexgallen.dev/job/Frontend-and-api-testing/ 
+Reports can be found on the left-hand side under "Cucumber reports"
+
 ## General
 
 ### Pre-requisites
