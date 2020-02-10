@@ -46,8 +46,10 @@ public class ItemInfoPage {
 
     public String getItemPrice(){
         // Wait for browser to update price element. This is required since selecting some options might change price.
-        System.out.println("IT IS FAILING HERE: "+itemPrice.getText());
-        new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(itemPrice,"+")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(itemPrice));
+        if(itemPrice.getText().contains("x")){
+            new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(itemPrice,"+")));
+        }
         return itemPrice.getText();
     }
     public void addItemToCart(){
