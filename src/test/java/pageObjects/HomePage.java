@@ -100,7 +100,7 @@ public class HomePage {
         boolean checkResult = true;
         for(WebElement result : searchResultsNoAds){
             // Compares price to price of previous item and stores it for next iteration of the loop
-            double currentPrice = Double.parseDouble(result.findElement(By.xpath("//span[@class='currency-value']")).getText());
+            double currentPrice = Double.parseDouble(result.findElement(By.xpath(".//span[@class='currency-value']")).getText());
             if(previousPrice>currentPrice){
                 checkResult = false;
             }
