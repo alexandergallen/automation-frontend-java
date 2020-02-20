@@ -30,7 +30,7 @@ public class etsy {
     ChromeOptions options = new ChromeOptions();
     List<String> itemInfoList = new ArrayList<>();
     List<String> itemPriceList = new ArrayList<>();
-
+    Locale locale;
     HomePage homePage;
     CartPage cartPage;
     ItemInfoPage itemInfoPage;
@@ -58,7 +58,6 @@ public class etsy {
             chromeDriverPath="/chromedriver";
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("intl.accept_languages", "en-US");
-            System.out.println(options.getCapabilityNames());
             options.setExperimentalOption("prefs", prefs);
             options.addArguments("--headless",
                     "--whitelisted-ips",
@@ -74,6 +73,8 @@ public class etsy {
         } else{
             options.addArguments("--headless", "--lang=en-US", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
         }
+        locale = Locale.getDefault();
+        System.out.println("Country: "+locale.getCountry()+"\nLanguage: "+locale.getLanguage());
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver(options);
         driver.navigate().to(url);
