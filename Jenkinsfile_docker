@@ -12,7 +12,7 @@ pipeline {
          steps {
             sh 'chmod +x gradlew'
             withGradle {
-                sh './gradlew build'
+                sh './gradlew build --no-daemon'
             }
             }
          }
