@@ -13,7 +13,6 @@ import java.util.List;
 public class ItemInfoPage {
     WebDriver driver;
     WebDriverWait wait;
-
     public ItemInfoPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);

@@ -58,6 +58,7 @@ public class etsy {
             chromeDriverPath="/chromedriver";
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("intl.accept_languages", "en-US");
+            System.out.println(options.getCapabilityNames());
             options.setExperimentalOption("prefs", prefs);
             options.addArguments("--headless",
                     "--whitelisted-ips",
