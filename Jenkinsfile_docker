@@ -3,7 +3,7 @@ pipeline {
    agent {
         docker {
             image 'alexgallen/jdk8-chromedriver'
-            args '-u root -v /automation-frontend-java/.gradle:/automation-frontend-java/.gradle'
+            args '-u root'
         }
    }
 
