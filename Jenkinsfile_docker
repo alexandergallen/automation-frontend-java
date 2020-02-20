@@ -4,6 +4,7 @@ pipeline {
         docker {
             image 'alexgallen/jdk8-chromedriver'
             args '-u root'
+            args '-v $HOME/.gradle:/root/.gradle'
         }
    }
 
