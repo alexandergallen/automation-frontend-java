@@ -4,7 +4,7 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-            git 'https://github.com/alexandergallen/automation-frontend-java'
+            //git 'https://github.com/alexandergallen/automation-frontend-java'
             sh 'sudo chmod +x gradlew'
             sh 'sudo ./gradlew build'
             }
