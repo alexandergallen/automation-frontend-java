@@ -8,7 +8,7 @@ pipeline {
             sh 'sudo ./gradlew build'
             }
          }
-      stage('Test frontend'){
+      stage('Test Etsy frontend'){
           steps{
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh 'sudo ./gradlew cucumber'
@@ -16,7 +16,7 @@ pipeline {
             }
 
       }
-      stage('Test api'){
+      stage('Test Github gists api'){
           steps{
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     withCredentials([usernamePassword(credentialsId: '2b8a3556-db9e-4b25-bf39-0d27faceb9d6', passwordVariable: 'password', usernameVariable: 'username')]) {
