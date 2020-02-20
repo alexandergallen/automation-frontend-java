@@ -30,7 +30,6 @@ public class etsy {
     ChromeOptions options = new ChromeOptions();
     List<String> itemInfoList = new ArrayList<>();
     List<String> itemPriceList = new ArrayList<>();
-    Locale locale;
     HomePage homePage;
     CartPage cartPage;
     ItemInfoPage itemInfoPage;
@@ -73,8 +72,6 @@ public class etsy {
         } else{
             options.addArguments("--headless", "--lang=en-US", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
         }
-        locale = Locale.getDefault();
-        System.out.println("Country: "+locale.getCountry()+"\nLanguage: "+locale.getLanguage());
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver(options);
         driver.navigate().to(url);
