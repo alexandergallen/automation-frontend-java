@@ -2,21 +2,22 @@ package gradle.cucumber;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
 import java.util.*;
 
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
 import pageObjects.HomePage;
@@ -26,6 +27,7 @@ public class etsy {
     WebDriver driver = null;
     WebDriverWait wait;
     String chromeDriverPath;
+    ChromeOptions options = new ChromeOptions();
     List<String> itemInfoList = new ArrayList<>();
     List<String> itemPriceList = new ArrayList<>();
 
@@ -52,8 +54,27 @@ public class etsy {
         }else{
             chromeDriverPath="C:\\ChromeDriver\\chromedriver.exe";
         }
+        if(System.getProperty("os.name").equals("Linux")){
+            chromeDriverPath="/chromedriver";
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("intl.accept_languages", "en-US");
+            options.setExperimentalOption("prefs", prefs);
+            options.addArguments("--headless",
+                    "--whitelisted-ips",
+                    "--disable-dev-shm-usage",
+                    "--window-size=1920,1080",
+                    "start-maximized",
+                    "--ignore-certificate-errors",
+                    "--no-sandbox",
+                    "--disable-infobars",
+                    "--disable-browser-side-navigation",
+                    "--disable-gpu",
+                    "enable-automation");
+        } else{
+            options.addArguments("--headless", "--lang=en-US", "--window-size=1920,1080", "--start-maximized", "--disable-gpu");
+        }
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.navigate().to(url);
     }
 
@@ -100,12 +121,15 @@ public class etsy {
         // Create handle for multiple tabs
         String winHandleBefore = driver.getWindowHandle();
         homePage.clickItem(0);
-
+        new WebDriverWait(driver,10).until(numberOfWindowsToBe(2));
         // Switch to the new tab since clicking on item automatically opens new tab
         for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
+            if(!winHandleBefore.contentEquals(winHandle)) {
+                driver.switchTo().window(winHandle);
+                break;
+            }
         }
-
+        new WebDriverWait(driver,10).until(ExpectedConditions.urlContains("etsy.com/uk/listing/"));
         itemInfoPage = new ItemInfoPage(driver);
         // Populate all selections on item info page
         itemInfoPage.populateAllSelections();
